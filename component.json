@@ -1,0 +1,102 @@
+{
+    "title": "Remote Diagnostic Support",
+    "description": "The Remote Diagnostic Support API will provide the possibility for 3rd party applications (e.g. ADAC, ATU, etc.) to access vehicle diagnostics data remotely on behalf of the Daimler customer. To use the endpoints you need a valid vin/fin (vehicleId).",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/mercedes-benz.com/diagnostics/1.0/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://api.mercedes-benz.com/remotediagnostic_tryout/v1",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "getDtcDataListByEcuUsingPOST": {
+            "main": "./lib/actions/getDtcDataListByEcuUsingPOST.js",
+            "title": "View the List of DTCs for specific vehicleId.",
+            "description": "This API creates a readout of DTCs for one vehicle. If the result is available immediately, the result is returned. If the result isn't available, a location to the DTC readout is returned. This location shall be polled until the result is available. INFO: GET Requests are not yet supported!",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getDtcDataListByEcuUsingPOST.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getDtcSnapshotReadoutsUsingPOST": {
+            "main": "./lib/actions/getDtcSnapshotReadoutsUsingPOST.js",
+            "title": "View the List of DTC Snapshot for specific vehicleId.",
+            "description": "This API creates a readout of a DTC snapshot from one vehicle. If the result is available immediately, the result is returned. If the result isn't available, a location to the DTC snapshot readout is returned. This location shall be polled until the result is available. INFO: GET Requests are not yet supported!",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getDtcSnapshotReadoutsUsingPOST.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getEcuDataListByVehicleIdUsingPOST": {
+            "main": "./lib/actions/getEcuDataListByVehicleIdUsingPOST.js",
+            "title": "View the List of ECU for specific vehicleId.",
+            "description": "This API creates a readout of ECUs for one vehicle. If the result is available immediately, the result is returned. If the result isn't available, a location to the ECU readout is returned. This location shall be polled until the result is available. INFO: GET Requests are not yet supported!",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getEcuDataListByVehicleIdUsingPOST.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getResourceReadoutsUsingPOST": {
+            "main": "./lib/actions/getResourceReadoutsUsingPOST.js",
+            "title": "View the List of resources",
+            "description": "This API creates a readout of available resources to the accessing party for one vehicle. If the result is available immediately, the result is returned. If the result isn't available, a location to the resource readout is returned. This location shall be polled until the result is available. INFO: GET Requests are not yet supported!",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getResourceReadoutsUsingPOST.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

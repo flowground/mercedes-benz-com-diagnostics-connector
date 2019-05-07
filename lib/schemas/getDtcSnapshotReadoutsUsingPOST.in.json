@@ -1,0 +1,17 @@
+{
+    "type": "object",
+    "properties": {
+        "vehicleId": {
+            "required": true,
+            "type": "string"
+        },
+        "ecuId": {
+            "required": true,
+            "type": "string"
+        },
+        "dtcId": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
